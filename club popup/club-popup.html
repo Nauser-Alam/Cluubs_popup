@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Popup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .popup-content {
+            position: relative;
+            margin: 5% auto; /* 5% from the top and centered */
+            padding: 20px;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 600px; /* Limit the maximum width */
+            background-color: white;
+            border-radius: 7px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .responsive-image {
+            width: 45%;
+            
+            height: auto-10px; /* Maintain aspect ratio */
+            border-radius: 10px;
+            opacity: 0; /* Start hidden */
+            animation: bounce-in 0.5s ease-in-out 0.5s 1 normal both;
+            margin:auto;
+            margin-top: 25px;
+            display: block;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (min-width: 600px) and (max-width: 1000px) {
+            .popup-content {
+                width: 80%;
+            }
+        }
+        .Nav{
+            position: relative;
+            background-color: rgb(37, 35, 35);
+            height: 10%;
+            margin-top: 0px;
+
+        }
+        .details01{
+            margin-top: 40px;
+            font-weight: lighter;
+            text-align: justify;
+        }
+        .popup-content::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 33.33%; /* One-third height */
+        background-color: rgb(19, 10, 10); /* White color to cover the bottom part */
+    }
+    </style>
+</head>
+<body>
+    <button id="openPopupBtn">Open Popup</button>
+
+    <div id="popup" class="popup">
+        
+        <div class="popup-content" id="popupContent">
+            <div style="color:aliceblue">Clubs and Societies</div>
+            <span id="closePopupBtn" class="close-btn"></span>
+            <img src="c:\Users\LENOVO\Downloads\Designer (23).png" alt="Popup Image 1" class="responsive-image">
+            <div class="details01">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti, soluta enim corrupti aperiam delectus vel, nesciunt, natus culpa consequatur dolores perspiciatis. Molestiae sapiente ea a iusto excepturi, numquam tempora reprehenderit.</p>
+            
+            
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('openPopupBtn').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'block';
+            const images = document.querySelectorAll('.responsive-image');
+            images.forEach((img, index) => {
+                img.style.animationDelay = `${0.5 + index * 0.5}s`; // Stagger the animation delay
+                img.style.opacity = '1';
+            });
+        });
+
+        document.getElementById('closePopupBtn').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+            const images = document.querySelectorAll('.responsive-image');
+            images.forEach(img => {
+                img.style.opacity = '0';
+            });
+        });
+
+        window.addEventListener('click', function(event) {
+            const popup = document.getElementById('popup');
+            const popupContent = document.getElementById('popupContent');
+            if (event.target == popup) {
+                popup.style.display = 'none';
+                const images = document.querySelectorAll('.responsive-image');
+                images.forEach(img => {
+                    img.style.opacity = '0';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
